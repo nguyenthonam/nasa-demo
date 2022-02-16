@@ -4,8 +4,8 @@
     <page-header></page-header>
 
     <!-- Main -->
-    <v-main>
-      <v-container>
+    <v-main class="ns-bg-color-light-gray">
+      <v-container class="ns-bg-color-white">
         <Nuxt />
       </v-container>
     </v-main>

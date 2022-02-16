@@ -1,0 +1,33 @@
+@import url('~assets/css/color.scss');
+
+.border-normal {
+  border: 1px solid #F2F2F2 !important;
+}
+.border-bottom-normal {
+  border-bottom: 1px solid #F2F2F2 !important;
+}
+.pointer{
+  cursor: pointer !important;
+}
+.text-bold {
+  font-weight: bold !important;
+}
+
+.ns-only-one-line{
+  overflow: hidden;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+.ns-only-two-line{
+  overflow: hidden;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.ns-only-three-line{
+  overflow: hidden;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
