@@ -32,7 +32,7 @@ export default {
       if (this.searching && this.searching.trim().length > 0) {
         this.$router.push({
           name: "search",
-          query: { search: this.searching }
+          query: { search: this.searching, page: 1 }
         });
       } else {
         alert("Please enter keyword!");
@@ -58,7 +58,7 @@ export default {
         this.searching = !this.$route.query.search
           ? ""
           : this.$route.query.search;
-        this.searchAction();
+        // this.searchAction();
       }
     });
   }

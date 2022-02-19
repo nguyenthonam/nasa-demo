@@ -2,10 +2,10 @@
   <v-row class="pa-0 ma-0">
     <v-col
       cols="12"
-      v-if="!displayItems || displayItems.length <= 0"
+      v-if="!items || items.length <= 0"
       class="text-center font-italic"
     >
-      # Chưa có dữ liệu #
+      # No Data #
     </v-col>
     <v-col v-else cols="12" class="pa-0 ma-0">
       <!-- List Products -->
@@ -13,7 +13,7 @@
         class="ma-0 pa-0 justify-left algin-center"
         style="margin-bottom: 10px !important"
       >
-        <template v-for="(item, index) in displayItems">
+        <template v-for="(item, index) in items">
           <v-col class="mb-1 pa-1" :key="index" :cols="numOfCols">
             <item
               :item="item"
@@ -25,16 +25,6 @@
         </template>
       </v-row>
       <!-- End -->
-
-      <!--Pagination -->
-      <v-row v-if="totalPages > 1" class="ma-2 mt-4 pa-0 justify-center">
-        <v-pagination
-          v-model="page"
-          :length="totalPages"
-          color="secondary"
-        ></v-pagination>
-      </v-row>
-      <!-- End -->
     </v-col>
   </v-row>
 </template>
@@ -43,17 +33,11 @@
 export default {
   props: {
     items: { type: Array, default: [] },
-    maxRow: { type: Number, default: 2 },
-    mobileColumn: { type: Number, default: 2 },
-    laptopColumn: { type: Number, default: 4 },
+    mobileColumn: { type: Number, default: 6 },
+    laptopColumn: { type: Number, default: 2 },
     showLike: { type: Boolean, default: true },
     showRemove: { type: Boolean, default: true },
     showEdit: { type: Boolean, default: true },
-  },
-  data() {
-    return {
-      page: 1,
-    };
   },
   computed: {
     numOfCols() {
@@ -64,21 +48,6 @@ export default {
         return this.laptopColumn;
       }
       return 3;
-    },
-    itemPerPage() {
-      if (this.maxRow <= 0) return 100;
-      return this.maxRow * (12 / this.numOfCols);
-    },
-    displayItems: function () {
-      if (!this.items) return [];
-      let from = (this.page - 1) * this.itemPerPage;
-      let to = (this.page - 1) * this.itemPerPage + this.itemPerPage;
-      return this.items.slice(from, to);
-    },
-    totalPages() {
-      if (!this.items || this.items.length <= 0) return 0;
-      let result = Math.ceil(this.items.length / this.itemPerPage);
-      return result;
     },
   },
 };
