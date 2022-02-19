@@ -14,12 +14,13 @@
         style="margin-bottom: 10px !important"
       >
         <template v-for="(item, index) in displayItems">
-          <v-col
-            class="mb-1 pa-1"
-            :key="index"
-            :cols="numOfCols"
-          >
-            <item :item="item"></item>
+          <v-col class="mb-1 pa-1" :key="index" :cols="numOfCols">
+            <item
+              :item="item"
+              :showLike="showLike"
+              :showRemove="showRemove"
+              :showEdit="showEdit"
+            ></item>
           </v-col>
         </template>
       </v-row>
@@ -45,6 +46,9 @@ export default {
     maxRow: { type: Number, default: 2 },
     mobileColumn: { type: Number, default: 2 },
     laptopColumn: { type: Number, default: 4 },
+    showLike: { type: Boolean, default: true },
+    showRemove: { type: Boolean, default: true },
+    showEdit: { type: Boolean, default: true },
   },
   data() {
     return {
@@ -63,7 +67,7 @@ export default {
     },
     itemPerPage() {
       if (this.maxRow <= 0) return 100;
-      return this.maxRow * this.numOfCols;
+      return this.maxRow * (12 / this.numOfCols);
     },
     displayItems: function () {
       if (!this.items) return [];

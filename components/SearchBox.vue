@@ -1,21 +1,5 @@
 <template>
   <client-only>
-    <!-- <v-autocomplete
-      :search-input.sync="searching"
-      height="100%"
-      outlined
-      dense
-      single-line
-      hide-details
-      clearable
-      color="#285C7F"
-      placeholder="Search..."
-      v-on:keydown.enter="searchAction"
-      @focus="searchBoxGetFocus"
-      @blur="searchBoxLeave"
-      :style="{ padding: $vuetify.breakpoint.smAndDown ? '0 0 0 5px' : '0 11px' }"
-    >
-    </v-autocomplete> -->
     <v-text-field
         v-model="searching"
         height="100%"

@@ -11,18 +11,24 @@
     <v-divider class="mx-2"></v-divider>
 
     <v-card-actions>
-      <v-btn icon @click="actionLike" :color="!item.liked ? 'gray' : 'red'">
-        <v-icon>mdi-heart</v-icon>
-      </v-btn>
       <v-spacer></v-spacer>
       <v-btn
+        v-if="showLike"
         icon
-        @click="actionRemove"
+        @click=" !item.liked ? actionLike(true) : actionLike(false)"
+        :color="!item.liked ? 'gray' : 'red'"
+      >
+        <v-icon>mdi-heart</v-icon>
+      </v-btn>
+      <v-btn
+        v-if="showRemove"
+        icon
+        @click="!item.removed ? actionRemove(true) : actionRemove(false)"
         :color="!item.removed ? 'gray' : 'teel'"
       >
         <v-icon>{{ !item.removed ? "mdi-delete" : "mdi-undo" }}</v-icon>
       </v-btn>
-      <v-btn icon @click="actionEdit">
+      <v-btn v-if="showEdit" icon @click="actionEdit">
         <v-icon>mdi-pencil</v-icon>
       </v-btn>
     </v-card-actions>
@@ -31,7 +37,12 @@
 
 <script>
 export default {
-  props: ["item"],
+  props: {
+    item: null,
+    showLike: { type: Boolean, default: true },
+    showRemove: { type: Boolean, default: true },
+    showEdit: { type: Boolean, default: true }
+  },
   methods: {
     renderImage(item) {
       if (item && item.links && item.links.length > 0 && item.links[0].href) {
@@ -39,33 +50,30 @@ export default {
       }
       return "/imgs/placeholder.png";
     },
-    actionLike() {
-      if (!this.item.liked) {
-        this.item.liked = true;
+    actionLike(isLiked) {
+      if (isLiked) {
+        this.$store.commit("setItemToLikedList", this.item);
         alert("Liked");
       } else {
-        this.item.liked = false;
+        this.$store.commit("removeItemInLikedList", this.item);
         alert("Unliked");
       }
-      this.$forceUpdate();
+      this.$forceUpdate()
     },
-    actionRemove() {
-      if (!this.item.removed) {
-        this.item.removed = true;
+    actionRemove(isRemoved) {
+      if (isRemoved) {
+        this.$store.commit("setItemToRemovedList", this.item);
         alert("Removed");
       } else {
-        this.item.removed = false;
+        this.$store.commit("removeItemInRemovedList", this.item);
         alert("Undo");
       }
-      this.$forceUpdate();
+      this.$forceUpdate()
     },
     actionEdit() {
       alert(`Action edit ${this.item.data[0].title}`);
     },
-  },
-  mounted() {
-    console.log("Item:", this.item);
-  },
+  }
 };
 </script>
 
