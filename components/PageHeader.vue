@@ -2,7 +2,7 @@
   <div>
     <v-app-bar fixed app dense dark>
       <!-- <v-app-bar-nav-icon @click.stop="drawer = !drawer" /> -->
-      <v-toolbar-title v-text="title" />
+      <v-toolbar-title class="pointer" v-text="title" @click="$router.push('/')" />
       <v-spacer />
       <search-box></search-box>
       <v-spacer></v-spacer>

@@ -34,7 +34,7 @@ export default {
   props: {
     items: { type: Array, default: [] },
     mobileColumn: { type: Number, default: 6 },
-    laptopColumn: { type: Number, default: 2 },
+    laptopColumn: { type: Number, default: 3 },
     showLike: { type: Boolean, default: true },
     showRemove: { type: Boolean, default: true },
     showEdit: { type: Boolean, default: true },

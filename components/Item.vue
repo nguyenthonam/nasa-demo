@@ -15,6 +15,7 @@
       <v-btn
         v-if="showLike"
         icon
+        small
         @click=" !item.liked ? actionLike(true) : actionLike(false)"
         :color="!item.liked ? 'gray' : 'red'"
       >
@@ -23,12 +24,13 @@
       <v-btn
         v-if="showRemove"
         icon
+        small
         @click="!item.removed ? actionRemove(true) : actionRemove(false)"
         :color="!item.removed ? 'gray' : 'teel'"
       >
         <v-icon>{{ !item.removed ? "mdi-delete" : "mdi-undo" }}</v-icon>
       </v-btn>
-      <v-btn v-if="showEdit" icon @click="actionEdit">
+      <v-btn small v-if="showEdit" icon @click="actionEdit">
         <v-icon>mdi-pencil</v-icon>
       </v-btn>
     </v-card-actions>
